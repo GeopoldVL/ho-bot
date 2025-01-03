@@ -2,7 +2,18 @@ const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord
 const fs = require('fs');
 require('dotenv').config();
 const { connectToDatabase } = require('./controllers/dbController');
+const express = require('express');
 
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Your bot is online!');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
